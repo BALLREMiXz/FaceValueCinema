@@ -260,3 +260,9 @@ div.film-poster.poster-unknown {aspect-ratio:2/3;height:auto;max-height:380px;bo
   .site-footer-compact .partner .p-text{position:static;width:100%;height:auto}
   .site-footer-compact .footer-admin{grid-column:auto;justify-self:auto;width:100%;border-top:1px solid #ffffff24;padding-top:12px}
 }
+
+/* Mobile (hamburger menu): solid black header bar and black dropdown. */
+@media(max-width:760px) {
+  header {background-color:#000;background-image:none;border-bottom-color:#2b2b30}
+  header nav {background-color:#000;background-image:none}
+}
