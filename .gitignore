@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.netlify/
+.cinema-data/
+.cinema-data-backup/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,286 @@
+﻿<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panuwat Cinema E-Ticket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Sarabun:wght@400;500;600;700&family=Noto+Serif:wght@500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#e0c075;
+    --gold-dim:#b89a58;
+    --text:#f3ede0;
+    --muted:#a9a49a;
+    --bg:#121212;
+    --white:#fff;
+    --page:#0b0b0b;
+    --panel:#161616;
+    --panel-line:#2a2a2a;
+    --btn-text:#1a1405;
+    --hall-filter:none;
+    --logo-filter:drop-shadow(0 0 6px rgba(0,0,0,.6));
+    --sh:rgba(6,6,6,.82);
+    --sh-mid:rgba(6,6,6,.6);
+    --sh-side:rgba(6,6,6,.45);
+    --tshadow:0 1px 3px rgba(0,0,0,.9),0 0 14px rgba(0,0,0,.7);
+    --poster-bg:linear-gradient(180deg,#3a2414 0%,#2a1a10 45%,#150d08 100%);
+    --grain:.18;
+  }
+  :root[data-theme="light"]{
+    --gold:#8a5f10;
+    --gold-dim:#8a5f10;
+    --text:#2a2114;
+    --muted:#6b6254;
+    --white:#1a1305;
+    --page:#e9e4d9;
+    --panel:#f6f2e8;
+    --panel-line:#d6cfbf;
+    --btn-text:#fff8e6;
+    --logo-filter:drop-shadow(0 0 3px rgba(0,0,0,.9)) drop-shadow(0 0 8px rgba(0,0,0,.5));
+    --hall-filter:invert(1) hue-rotate(180deg) brightness(1.05);
+    --sh:rgba(246,240,226,.85);
+    --sh-mid:rgba(246,240,226,.62);
+    --sh-side:rgba(246,240,226,.45);
+    --tshadow:0 1px 2px rgba(255,255,255,.9),0 0 12px rgba(255,255,255,.8);
+    --grain:.12;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--page);
+    font-family:'Sarabun',sans-serif;
+    color:var(--text);
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- side panel ---------- */
+  .panel{
+    width:220px;flex:none;
+    background:var(--panel);border-right:1px solid var(--panel-line);
+    padding:24px 18px;display:flex;flex-direction:column;gap:14px;
+    position:sticky;top:0;height:100vh;
+  }
+  .panel h2{font-size:15px;font-weight:600;color:var(--gold);letter-spacing:.04em}
+  .panel p{font-size:12px;color:var(--muted);line-height:1.6}
+  .btn{
+    font-family:inherit;font-size:15px;font-weight:600;
+    padding:12px 14px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--gold);color:var(--btn-text);
+  }
+  .btn:hover{filter:brightness(1.08)}
+  .btn.ghost{background:transparent;color:var(--gold)}
+  .btn.ghost:hover{background:rgba(138,138,138,.15)}
+
+  /* ---------- stage ---------- */
+  .stage-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+  .stage{position:relative}              /* size set by JS */
+  .ticket-scale{transform-origin:top left}
+
+  /* ---------- ticket 1769 x 924 ---------- */
+  .ticket{
+    position:relative;width:1769px;height:924px;overflow:hidden;
+    background:#121212;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .bg{position:absolute;inset:0;background:url('Monochrome Concert Hall Silhouettes.png') center/cover no-repeat;filter:var(--hall-filter)}
+  .shade{position:absolute;inset:0;background:
+    linear-gradient(180deg,var(--sh) 0%,var(--sh) 18%,var(--sh-mid) 50%,transparent 74%),
+    linear-gradient(90deg,var(--sh-side) 0%,transparent 26%,transparent 66%,var(--sh-side) 78%,var(--sh-side) 100%)}
+  :root[data-theme="light"] .ticket{background:#ece6d8}
+  .ticket::after{ /* grain */
+    content:"";position:absolute;inset:0;z-index:5;opacity:var(--grain);mix-blend-mode:overlay;pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .topbar{position:absolute;left:25px;right:25px;top:25px;height:5px;background:var(--gold)}
+  .hr{position:absolute;left:64px;right:64px;height:1px;background:rgba(224,192,117,.28)}
+  .abs{position:absolute;white-space:nowrap;text-shadow:var(--tshadow)}
+  [contenteditable]{outline:none}
+  [contenteditable]:focus{background:rgba(224,192,117,.12);border-radius:4px}
+
+  .logo{left:64px;top:56px;font-family:'Playfair Display',serif;font-size:66px;color:var(--gold);line-height:1}
+  .brand{left:142px;top:62px;font-size:27px;color:var(--gold);letter-spacing:.01em}
+  .tagline{left:142px;top:104px;font-size:14px;color:var(--muted);letter-spacing:.03em}
+  .status{right:262px;top:70px;font-size:20px;color:var(--gold);text-align:right;letter-spacing:.02em}
+  .status-th{right:262px;top:102px;font-size:20px;font-weight:700;color:var(--white);text-align:right}
+
+  .fv-logo{position:absolute;left:64px;top:34px;height:112px;width:auto;filter:var(--logo-filter)}
+  .poster{
+    left:64px;top:172px;width:440px;height:590px;cursor:pointer;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 12%, rgba(255,170,70,.55), transparent 35%),
+      var(--poster-bg);
+    box-shadow:0 0 0 1px rgba(224,192,117,.18);
+  }
+  .poster img{width:100%;height:100%;object-fit:cover;display:block}
+  .poster .hint{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:18px;color:rgba(255,230,190,.7);line-height:1.6;padding:20px;
+  }
+  .admit{left:64px;top:774px;font-size:20px;color:var(--gold);letter-spacing:.02em}
+
+  .title{left:584px;top:190px;font-family:'Playfair Display',serif;font-weight:500;font-size:56px;color:var(--text);letter-spacing:.01em;line-height:1.1}
+  .title-th{left:584px;top:265px;font-size:30px;font-weight:600;color:var(--gold)}
+  .lbl{font-size:18px;color:var(--muted)}
+  .val{font-size:30px;font-weight:500;color:var(--text)}
+  .seats{left:584px;top:490px;width:640px;display:flex;flex-wrap:wrap;gap:10px;white-space:normal}
+  .seatbox{min-width:96px;height:48px;border:1.5px solid var(--gold-dim);background:rgba(224,192,117,.08);display:flex;align-items:center;justify-content:center;padding:0 14px;font-size:28px;color:var(--text)}
+  .guest{left:584px;top:733px;font-size:30px;font-weight:500;color:var(--white)}
+
+  .divider-v{position:absolute;left:544px;top:165px;height:618px;border-left:2px dashed rgba(224,192,117,.5)}
+  .cinema-no{left:1320px;top:236px;font-family:'Playfair Display',serif;font-size:190px;color:var(--gold);line-height:1;font-variant-numeric:lining-nums}
+  .total{left:1320px;top:490px;font-family:'Playfair Display',serif;font-size:44px;color:var(--text);line-height:1.1;font-variant-numeric:lining-nums}
+  .sub{left:1320px;top:556px;font-size:20px;color:var(--muted)}
+  .booking-lbl{left:1320px;top:621px;font-size:17px;color:var(--gold)}
+  .booking{left:1320px;top:655px;font-family:'JetBrains Mono',monospace;font-size:25px;color:var(--text);letter-spacing:.02em}
+  .keep{left:1320px;top:738px;font-size:19px;color:var(--muted)}
+  .foot-l{left:64px;top:831px;font-size:24px;font-weight:500;color:var(--text)}
+  .foot-r{right:265px;top:838px;font-size:18px;color:var(--muted);text-align:right}
+
+  /* ---------- print: exactly 1769 x 924 ---------- */
+  @page{size:1769px 924px;margin:0}
+  @media print{
+    html,body{height:auto;background:#000;display:block;min-height:0}
+    .panel{display:none}
+    .stage-wrap{display:block;padding:0;overflow:visible}
+    .stage{width:1769px !important;height:924px !important}
+    .ticket-scale{transform:none !important}
+    .ticket{page-break-after:avoid;break-inside:avoid}
+    .poster .hint{display:none}
+  }
+</style>
+</head>
+<body>
+
+<aside class="panel">
+  <!-- <h2>PANUWAT CINEMA</h2> -->
+  <p>คลิกที่ข้อความบนตั๋วเพื่อแก้ไขได้ทันที และคลิกที่กรอบโปสเตอร์เพื่อใส่รูป</p>
+  <button class="btn" onclick="window.print()">🖨 Print ตั๋ว</button>
+  <button class="btn ghost" id="themeBtn">☀ ธีมสว่าง</button>
+  <button class="btn ghost" id="addSeat">+ เพิ่มที่นั่ง</button>
+  <button class="btn ghost" id="delSeat">− ลบที่นั่งสุดท้าย</button>
+  <button class="btn ghost" id="posterBtn">เปลี่ยนรูปโปสเตอร์</button>
+  <p>ขนาดตอน Print: 1769 × 924 px<br>ในหน้าต่าง Print ให้ตั้ง Margins = None และเปิด Background graphics</p>
+  <input type="file" id="posterInput" accept="image/*" hidden>
+</aside>
+
+<main class="stage-wrap">
+  <div class="stage" id="stage">
+    <div class="ticket-scale" id="scale">
+      <div class="ticket">
+        <div class="bg"></div>
+        <div class="shade"></div>
+        <!-- <div class="topbar"></div> -->
+
+        <!-- header -->
+        <!-- <div class="abs logo">P</div> -->
+        <!-- <div class="abs brand" contenteditable="true" spellcheck="false">PANUWAT CINEMA</div> -->
+        <!-- <div class="abs tagline" contenteditable="true" spellcheck="false">YOUR SEAT. YOUR STORY.</div> -->
+        <div class="abs status" contenteditable="true" spellcheck="false">E-TICKET &nbsp;/&nbsp; APPROVED</div>
+        <div class="abs status-th" contenteditable="true" spellcheck="false">อนุมัติแล้ว • พร้อมเข้าชม</div>
+        <img class="fv-logo" src="FaceValue.png" alt="Face Value">
+        <div class="hr" style="top:150px"></div>
+
+        <!-- poster -->
+        <div class="abs poster" id="poster" title="คลิกเพื่อใส่รูปโปสเตอร์">
+          <div class="hint">คลิกเพื่อใส่รูป<br>โปสเตอร์หนัง</div>
+        </div>
+        <div class="abs admit" contenteditable="true" spellcheck="false">ADMIT 1 &nbsp;/&nbsp; DIGITAL 2D</div>
+
+        <!-- movie -->
+        <div class="abs title" contenteditable="true" spellcheck="false">JETASIK</div>
+        <div class="abs title-th" contenteditable="true" spellcheck="false">เจตสิก</div>
+
+        <div class="abs lbl" style="left:584px;top:344px">วันฉาย / DATE</div>
+        <div class="abs val" style="left:584px;top:376px" contenteditable="true" spellcheck="false">20 ตุลาคม 2569</div>
+
+        <div class="abs lbl" style="left:900px;top:344px">รอบฉาย / SHOWTIME</div>
+        <div class="abs val" style="left:900px;top:376px" contenteditable="true" spellcheck="false">18:00 น.</div>
+
+        <div class="abs lbl" style="left:584px;top:453px">ที่นั่ง / SEATS</div>
+        <div class="abs seats" id="seats"><div class="seatbox" contenteditable="true" spellcheck="false">A5</div></div>
+
+        <div class="abs lbl" style="left:584px;top:704px">ผู้จอง / GUEST</div>
+        <div class="abs guest" contenteditable="true" spellcheck="false">golf</div>
+
+        <!-- right stub -->
+        <div class="divider-v"></div>
+        <div class="abs lbl" style="left:1320px;top:196px">CINEMA</div>
+        <div class="abs cinema-no" contenteditable="true" spellcheck="false">01</div>
+        <div class="abs lbl" style="left:1320px;top:457px">TOTAL / ยอดรวม</div>
+        <div class="abs total" contenteditable="true" spellcheck="false">20 THB</div>
+        <div class="abs sub" contenteditable="true" spellcheck="false">1 ที่นั่ง × 20 บาท</div>
+        <div class="abs booking-lbl">BOOKING NO.</div>
+        <div class="abs booking" contenteditable="true" spellcheck="false">PC-7455EEBB96</div>
+        <div class="abs keep" contenteditable="true" spellcheck="false">แสดงตั๋วหนังก่อนเข้าชม</div>
+
+        <!-- footer -->
+        <div class="hr" style="top:806px"></div>
+        <div class="abs foot-l" contenteditable="true" spellcheck="false">โปรดแสดงตั๋วนี้ให้เจ้าหน้าที่ตรวจสอบก่อนเข้าชม <br> Please present this ticket to the staff for inspection before entry.</div>
+        <div class="abs foot-r" contenteditable="true" spellcheck="false">เฉพาะวัน รอบ และที่นั่งที่ระบุ</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const W = 1769, H = 924;
+  const stage = document.getElementById('stage');
+  const scaleEl = document.getElementById('scale');
+
+  function fit(){
+    const panel = document.querySelector('.panel');
+    const availW = window.innerWidth - (panel ? panel.offsetWidth : 0) - 48;
+    const availH = window.innerHeight - 48;
+    const s = Math.min(availW / W, availH / H, 1);
+    scaleEl.style.transform = 'scale(' + s + ')';
+    stage.style.width = (W * s) + 'px';
+    stage.style.height = (H * s) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('beforeprint', () => { scaleEl.style.transform = 'none'; });
+  window.addEventListener('afterprint', fit);
+  fit();
+
+  // theme toggle
+  const themeBtn = document.getElementById('themeBtn');
+  function setTheme(t){
+    document.documentElement.dataset.theme = t;
+    themeBtn.textContent = t === 'light' ? '🌙 ธีมมืด' : '☀ ธีมสว่าง';
+    try{ localStorage.setItem('ticketTheme', t); }catch(e){}
+  }
+  let saved = 'dark';
+  try{ saved = localStorage.getItem('ticketTheme') || 'dark'; }catch(e){}
+  setTheme(saved);
+  themeBtn.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'));
+
+  // seats
+  const seats = document.getElementById('seats');
+  document.getElementById('addSeat').addEventListener('click', () => {
+    const d = document.createElement('div');
+    d.className = 'seatbox'; d.contentEditable = 'true'; d.spellcheck = false; d.textContent = 'A6';
+    seats.appendChild(d); d.focus();
+    document.getSelection().selectAllChildren(d);
+  });
+  document.getElementById('delSeat').addEventListener('click', () => {
+    if(seats.children.length > 1) seats.lastElementChild.remove();
+  });
+
+  // poster upload
+  const input = document.getElementById('posterInput');
+  const poster = document.getElementById('poster');
+  const pick = () => input.click();
+  poster.addEventListener('click', pick);
+  document.getElementById('posterBtn').addEventListener('click', pick);
+  input.addEventListener('change', () => {
+    const f = input.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = e => { poster.innerHTML = '<img alt="poster" src="' + e.target.result + '">'; };
+    r.readAsDataURL(f);
+  });
+</script>
+</body>
+</html>
+

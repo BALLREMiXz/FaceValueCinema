@@ -1,0 +1,248 @@
+/* PNG backgrounds: paths are relative to this CSS file. */
+body {
+  background-color: #08090b;
+  background-image: url('../assets/backgrounds/body-bg.png');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+header {
+  background-color: #09090b;
+  background-image: url('../assets/backgrounds/header-bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+footer.site-footer {
+  display: block;
+  background-color: #09090b;
+  background-image: url('../assets/backgrounds/footer-bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 42px 5% 22px;
+}
+.footer-brand-row {display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+footer.site-footer .footer-tagline {margin:0;flex:1;color:#c6c3c0}
+.footer-info {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;max-width:850px;margin:30px 0}
+.footer-organizer {padding-right:36px;border-right:1px solid #ffffff55}
+footer.site-footer .footer-label {margin:0 0 4px;font-size:14px;color:#d8d5d1;letter-spacing:0}
+.footer-organizer strong {display:block;font-family:Tahoma,Arial,sans-serif;font-size:25px;line-height:1.3;color:#f5f2ec}
+.footer-organizer-logo {display:block;max-width:260px;max-height:90px;object-fit:contain;object-position:left center;margin-top:12px}
+.footer-organizer-logo[hidden] {display:none}
+.footer-social-icons {display:flex;align-items:center;gap:16px;margin:10px 0 8px}
+.footer-social-icon {display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;color:#f5f2ec}
+a.footer-social-icon:hover {color:var(--gold,#d7b875)}
+.footer-social-icon svg {display:block;width:32px;height:32px}
+footer.site-footer .footer-handle {display:inline-block;font-size:16px;color:#e1deda;overflow-wrap:anywhere}
+.footer-bottom {display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid #ffffff22;padding-top:18px}
+footer.site-footer .footer-bottom small {font-size:12px;color:#aaa}
+@media(max-width:760px) {
+  body {background-attachment:scroll}
+  header nav {background-color:#121216;background-image:url('../assets/backgrounds/header-bg.png');background-size:cover;background-position:center}
+  footer.site-footer {padding:30px 5% 20px}
+  .footer-brand-row {gap:18px}
+  footer.site-footer .footer-tagline {flex-basis:100%}
+  .footer-info {gap:22px}
+  .footer-organizer {padding-right:22px}
+  .footer-organizer strong {font-size:20px}
+  .footer-organizer-logo {max-width:100%;max-height:70px}
+  .footer-social-icons {gap:10px}
+}
+@media(max-width:460px) {
+  .footer-info {grid-template-columns:1fr;gap:24px}
+  .footer-organizer {padding-right:0;padding-bottom:22px;border-right:0;border-bottom:1px solid #ffffff33}
+}
+
+/* Balanced text-only links and buttons */
+.ticket-nav {display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 18px;text-align:center;white-space:nowrap}
+.actions {gap:12px;flex-wrap:wrap}
+.actions > .btn,.actions > button {text-align:center;min-height:44px;padding-left:22px;padding-right:22px}
+.card > .btn {display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;text-align:center;padding:10px 16px}
+.section-head > a {display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:6px 0;text-align:center}
+.footer-info {max-width:1100px;margin:32px auto;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.footer-bottom > a {display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:6px 0}
+@media(max-width:760px) {
+  .ticket-nav {min-height:36px;padding:7px 12px}
+  .actions > .btn,.actions > button {padding-left:18px;padding-right:18px}
+  .section-head {gap:16px}
+  .section-head > a {flex-shrink:0}
+}
+@media(max-width:460px) {
+  .footer-info {grid-template-columns:1fr;margin-top:26px;margin-bottom:26px}
+}
+
+/* Light paper background: dark ink outside dark panels. */
+body {background-color:#eee6d5}
+#app > .wrap {color:#29251f;font-family:Tahoma,Arial,sans-serif}
+#app > .wrap > .eyebrow,
+#app > .wrap > .section-head .eyebrow {color:#77551d}
+.wrap .page-title,
+.wrap .section-head h2 {color:#29251f;font-family:inherit}
+.wrap .section-head > a {color:#704e16;font-weight:600}
+.wrap .section-head .sub,
+.wrap > .sub {color:#625b50}
+.wrap .steps {color:#5b554c}
+.wrap .steps span:first-child {color:#78531a;font-weight:600}
+.wrap .card {padding:12px;border:1px solid #9b8c6f55;border-radius:10px;background:rgba(255,251,240,.86);box-shadow:0 3px 12px #3025180a}
+.wrap .card h3 {color:#29251f;font-weight:600;line-height:1.7}
+.wrap .card .en {color:#79571f;line-height:1.6}
+.wrap .card .meta {color:#5e574d}
+.wrap .card > .badge {color:#70521c;border-color:#9b8353;background:#f4ebd7}
+.wrap .card .poster .badge {color:#e9cf8b;background:#11100eed}
+.wrap .card > .btn {color:#352716;border-color:#8a744d;background:#eee3c9;font-weight:600}
+.wrap .card > .btn:hover {background:#d7b875;color:#1c160e;border-color:#8a744d}
+.wrap .love-note {color:#66574f;font-size:11px;line-height:1.6}
+.wrap .love-hearts svg {stroke:#a13b55}
+.wrap .love-hearts .filled svg {fill:#a13b55;stroke:#a13b55}
+.wrap .love-hearts button:hover svg {stroke:#65233a}
+.wrap > .filters button {color:#3b3021;border-color:#938468;background:#fff9e9b3}
+.wrap > .filters button.active {color:#1f180d;border-color:#7e5f27;background:#d7b875}
+.wrap input,.wrap select {color:#f5f2ec;background:#1b1c21}
+.wrap .panel,.wrap .ticket-card,.wrap .ribbon {color:#f5f2ec}
+.wrap .panel .eyebrow,.wrap .ribbon .eyebrow {color:#d7b875}
+.wrap .panel .sub,.wrap .ticket-card .sub {color:#aaa5a0}
+.wrap .panel .section-head h2,.wrap .panel .page-title,.wrap .ribbon h2 {color:#f5f2ec}
+.wrap .panel .section-head > a {color:#d7b875}
+.wrap .empty {color:#51483c;border-color:#998769;background:#fff9e9cc}
+.wrap > .error {color:#9c2233}
+
+/* Compact footer matching the supplied layout. */
+footer.site-footer.site-footer-compact {
+  display:grid;
+  grid-template-columns:max-content max-content minmax(0,1fr);
+  align-items:start;
+  column-gap:32px;
+  row-gap:20px;
+  padding:38px 5%;
+  min-height:160px;
+  font-family:Tahoma,Arial,sans-serif;
+  color:#e8e3d9;
+}
+.site-footer-compact .footer-identity {min-width:0}
+.site-footer-compact .brand {max-width:none}
+footer.site-footer-compact .footer-tagline {margin:14px 0 0;font-family:inherit;font-size:12px;line-height:1.7;color:#c6c0b4}
+.site-footer-compact .footer-contact {align-self:start;padding-top:3px}
+.site-footer-compact .footer-social-icons {gap:16px;margin:0 0 10px}
+.site-footer-compact .footer-social-icon {width:30px;height:30px}
+.site-footer-compact .footer-social-icon svg {width:27px;height:27px}
+footer.site-footer-compact .footer-handle {font-family:inherit;font-size:13px;line-height:1.7;color:#e8e3d9}
+.site-footer-compact .footer-admin {justify-self:end;align-self:center;display:inline-flex;align-items:center;min-height:40px;font-family:inherit;font-size:12px;color:#c6c0b4}
+.site-footer-compact .footer-admin:hover {color:#d7b875}
+@media(max-width:760px) {
+  footer.site-footer.site-footer-compact {column-gap:24px;padding:30px 5%;min-height:145px}
+  .wrap .card {padding:9px}
+}
+@media(max-width:560px) {
+  footer.site-footer.site-footer-compact {grid-template-columns:minmax(0,1fr) max-content;gap:24px 16px}
+  .site-footer-compact .footer-admin {grid-column:1/-1;justify-self:start;align-self:start;border-top:1px solid #ffffff24;width:100%;padding-top:12px}
+  .site-footer-compact .footer-social-icons {gap:10px}
+  footer.site-footer-compact .footer-handle {font-size:12px}
+}
+@media(max-width:380px) {
+  footer.site-footer.site-footer-compact {grid-template-columns:1fr}
+  .site-footer-compact .footer-contact {padding-top:0}
+  .site-footer-compact .footer-admin {grid-column:auto}
+}
+
+/* Lighter background painting and stable page geometry. */
+html {scrollbar-gutter:stable}
+body {background-attachment:scroll;background-size:100% auto;background-repeat:repeat-y}
+header {-webkit-backdrop-filter:none;backdrop-filter:none}
+#app {min-height:calc(100vh - 254px)}
+#app > .loading {min-height:320px;display:grid;place-items:center;margin:0;padding:60px 5%;color:#70521c}
+button,.btn {transition:color .15s ease,background-color .15s ease,border-color .15s ease}
+@supports not (scrollbar-gutter:stable) {html {overflow-y:scroll}}
+@media(max-width:760px) {#app {min-height:calc(100vh - 222px)}}
+@media(prefers-reduced-motion:reduce) {button,.btn {transition:none}}
+
+/* Desktop header: paper strip; black torn shapes are divs tied to the logo, menu and ticket button, so they never drift on resize. */
+@media(min-width:761px) {
+  header {
+    background-color: #eee6d5;
+    background-image: none;
+    border-bottom-color: #9b8c6f55;
+  }
+  header .brand,
+  header nav,
+  header .ticket-nav {position:relative;z-index:0}
+  header .brand::before,
+  header nav::before,
+  header .ticket-nav::before {
+    content:'';
+    position:absolute;
+    z-index:-1;
+    background:#080a09;
+    pointer-events:none;
+    -webkit-mask:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 100' preserveAspectRatio='none'><filter id='b' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='3' seed='4' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='26' xChannelSelector='R' yChannelSelector='G'/></filter><rect x='22' y='20' width='256' height='60' fill='black' filter='url(%23b)'/></svg>") center/100% 100% no-repeat;
+    mask:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 100' preserveAspectRatio='none'><filter id='b' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='3' seed='4' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='26' xChannelSelector='R' yChannelSelector='G'/></filter><rect x='22' y='20' width='256' height='60' fill='black' filter='url(%23b)'/></svg>") center/100% 100% no-repeat;
+  }
+  header .brand::before {inset:-22px -44px -22px -34px}
+  header nav::before {inset:0 -36px 0 -44px}
+  header .ticket-nav::before {inset:-18px -28px}
+  header nav a.active:after {bottom:-12px}
+}
+
+/* Partner logos in footer: marks share one height (top-aligned with the brand logo); name text sits on the tagline baseline. */
+.site-footer-compact .footer-partners {display:flex;align-items:flex-start;gap:34px;padding-top:0}
+.partner {position:relative;margin:0;height:85px}
+.partner .p-mark {display:block;height:50px;width:auto}
+.partner .p-text {position:absolute;left:0;bottom:0;width:100%;height:auto}
+@media(max-width:760px) {.footer-partners {gap:18px}.partner {height:70px}.partner .p-mark {height:40px}}
+@media(max-width:380px) {.footer-partners {flex-wrap:wrap}}
+
+/* Heart percentage + review dialogs */
+.love-hearts {align-items:center}
+.love-percent {margin-left:auto;padding-left:8px;font:600 13px Tahoma,Arial,sans-serif;color:#a13b55;white-space:nowrap}
+dialog.review-dialog {width:min(520px,94%);padding:28px;background:#101115;color:#f5f2ec;border:1px solid #4c4331;border-radius:12px}
+.review-dialog h2 {margin:6px 0 10px;font-size:22px;font-weight:normal}
+.review-hearts {color:#dc7088;font-size:22px;letter-spacing:3px;margin-bottom:14px}
+.review-hearts span {color:#44454b}
+.review-dialog textarea {display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #34343c;border-radius:5px;background:#1b1c22;color:#f5f2ec;font:inherit;resize:vertical;min-height:110px}
+.review-dialog .actions {margin-top:18px}
+.review-list {max-height:55vh;overflow:auto;display:grid;gap:12px;margin:12px 0}
+.review-list article {padding:14px;border:1px solid #2b2b30;border-radius:8px;background:#16171c}
+.review-list p {margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#d8d5d1}
+.review-meta {display:flex;justify-content:space-between;align-items:center;gap:10px}
+.review-meta small {color:#97989f}
+.love-hearts {min-width:0}
+.love-hearts button {flex:1 1 0;min-width:0;max-width:36px;width:auto;padding:4px 0}
+.love-hearts button svg {width:min(24px,100%)}
+.love-percent {flex:0 0 auto;margin-left:6px;padding-left:0;font-size:12px}
+
+/* Coming-soon films: white card-back. White edge, gold double frame, tiled faint logo pattern, ringed serif "?". */
+.poster-unknown {
+  position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;width:100%;height:100%;
+  background:#fff;border-radius:7px;box-shadow:0 0 0 1px #cdbf9f,0 3px 10px #2c1f0a26;
+  color:#8f6b1f;font:bold clamp(60px,8.5vw,110px)/1 Georgia,'Times New Roman',serif;
+  text-shadow:0 1px 0 #fff,0 2px 6px #8f6b1f33;user-select:none;
+}
+.poster-unknown::before {
+  content:'';position:absolute;inset:9px;z-index:-1;border-radius:4px;background:radial-gradient(circle at 50% 50%,#0000 0 calc(31% - 1px),#c9a456 calc(31% - 1px) 31%,#0000 31% calc(35% - 1px),#d7b87577 calc(35% - 1px) 35%,#0000 35%),#fffefa;
+  box-shadow:inset 0 0 0 1px #b9954a,inset 0 0 0 5px #fffefa,inset 0 0 0 6px #d7b87599;
+}
+.poster-unknown::after {
+  content:'';position:absolute;inset:16px;z-index:-1;pointer-events:none;
+  background:
+    url('../assets/logo.png') center/54px auto repeat space;
+  -webkit-mask:radial-gradient(circle at 50% 50%,#0000 0 33%,#000 36%);mask:radial-gradient(circle at 50% 50%,#0000 0 33%,#000 36%);
+  filter:sepia(.8) saturate(.8);
+  opacity:.14;
+}
+div.film-poster.poster-unknown {aspect-ratio:2/3;height:auto;max-height:380px;border:1px solid #cfc6b2;box-shadow:0 6px 22px #0006}
+
+/* Now-showing detail: single poster (same file as the card) + facts. */
+@media(min-width:1101px) {.film-top.film-top-now {grid-template-columns:minmax(220px,320px) minmax(280px,1fr);justify-content:start}}
+.film-top-now .film-poster {max-height:560px;object-fit:contain}
+
+.refund-btn {margin-left:6px;padding:6px 12px;font-size:11px;color:#f3a0a0;border-color:#84353588}
+.refund-btn:hover {color:#ffd0d0;border-color:#f3a0a0}
+
+/* Spare seats: one horizontal row (S0–S7) in front of row A, teal instead of red. Spacing to the screen is unchanged. */
+.seat.spare:not(.selected):not(:disabled) {background:#15363b;border-color:#2f7078;border-bottom-color:#235259;color:#8fd3d9}
+.seat:nth-child(-n+8) {margin-bottom:12px}
+.legend i.spare {background:#2f7078}
+.seat.spare.locked:disabled {background:#112529;border-color:#254b51;border-bottom-color:#1d3a3f;color:#4d8a91;opacity:.6}
+.spare-note {margin:-14px 0 16px;text-align:center;font-size:12px;color:#8fd3d9}
+.spare-note:empty {display:none}
