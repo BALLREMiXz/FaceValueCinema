@@ -65,6 +65,19 @@ async function exportTicket(o){
     $('#detail-body').innerHTML='<div class="eyebrow">YOUR MOVIE TICKET</div><h2>ตั๋วพร้อมบันทึกแล้ว</h2><img class="ticket-preview-image" alt="ภาพตั๋วที่อนุมัติแล้ว"><div class="ticket-preview-actions"><a id="save-jpg" class="btn gold">บันทึกตั๋ว JPG ↓</a><button id="close-ticket">ปิด</button></div><p class="notice">หาก Chrome ไม่เริ่มดาวน์โหลด ให้คลิกขวาบนภาพ แล้วเลือก “บันทึกรูปภาพเป็น…”</p>';
     $('.ticket-preview-image').src=result.dataUrl;
     const link=$('#save-jpg');link.href=result.dataUrl;link.download=result.filename;
+    const ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    if(ios){
+      // iOS Safari ignores the download attribute: use the share sheet ("Save Image") or fall back to long-press.
+      $('.ticket-preview-image').insertAdjacentHTML('afterend','<p class="notice">บน iPhone/iPad: กดปุ่มบันทึก แล้วเลือก “บันทึกรูปภาพ” หรือกดค้างที่รูปตั๋วแล้วเลือก “เพิ่มไปยังรูปภาพ”</p>');
+      link.onclick=async e=>{
+        e.preventDefault();
+        try{
+          const blob=await (await fetch(result.dataUrl)).blob(),file=new File([blob],result.filename,{type:'image/jpeg'});
+          if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});return;}
+        }catch(err){if(err&&err.name==='AbortError')return;}
+        alert('กดค้างที่รูปตั๋ว แล้วเลือก “เพิ่มไปยังรูปภาพ” เพื่อบันทึก');
+      };
+    }
     $('#close-ticket').onclick=()=>dialog.close();
   }catch(error){$('#detail-body').innerHTML='<h2>ยังสร้างตั๋วไม่ได้</h2><p class="error">'+esc(error.message)+'</p><p>ปิดหน้าต่างนี้แล้วกดรับตั๋วอีกครั้ง</p>';throw error;}
 }
