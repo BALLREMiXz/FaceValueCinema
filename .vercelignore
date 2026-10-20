@@ -1,0 +1,6 @@
+.cinema-data
+.netlify
+PosterTicker
+node_modules
+dist
+.env

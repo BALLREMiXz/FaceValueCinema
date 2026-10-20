@@ -1,0 +1,21 @@
+{
+  "name": "jetasik-cinema",
+  "private": true,
+  "dependencies": {
+    "@netlify/database": "^2.0.1",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@netlify/database-dev": "^1.0.1",
+    "netlify-cli": "^27.13.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "test:server": "node scripts/test-server.mjs",
+    "build": "node scripts/build.mjs",
+    "db:setup": "node scripts/db-setup.mjs"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}
