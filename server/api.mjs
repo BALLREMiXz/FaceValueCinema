@@ -42,6 +42,11 @@ export function createAPI(pool,{local=false,username='admin',password='',clock=(
   if(action==='admin/orders'){await tx(expire);return reply((await pool.query('SELECT * FROM cinema_orders ORDER BY created,id')).rows.map(clean));}
   if(action==='admin/reviews'){return reply((await pool.query("SELECT movie,hearts,review,created FROM cinema_loves WHERE review IS NOT NULL AND review<>'' ORDER BY created DESC")).rows.map(r=>({...r,created:Number(r.created)})));}
   if(action==='admin/loves'){return reply((await pool.query('SELECT movie,COUNT(*)::int AS count,AVG(hearts)::float AS average,SUM(hearts)::int AS total FROM cinema_loves GROUP BY movie')).rows.map(r=>({...r,percent:Math.round(r.average/5*100)})));}
+  if(action==='admin/reset'){
+   if(b.confirm!=='RESET')fail('ต้องยืนยันการล้างข้อมูลก่อน');
+   await tx(async c=>{await c.query('DELETE FROM cinema_receipts');await c.query('DELETE FROM cinema_seats');await c.query('DELETE FROM cinema_orders');});
+   return reply({ok:true});
+  }
   if(action==='admin/refund'){
    await tx(async c=>{const o=(await c.query('SELECT * FROM cinema_orders WHERE id=$1 FOR UPDATE',[b.id])).rows[0];if(!o||o.status!=='approved')fail('คืนตั๋วได้เฉพาะรายการที่อนุมัติแล้ว',409);
     await c.query("UPDATE cinema_orders SET status='rejected',payload=$2 WHERE id=$1",[o.id,{...o.payload,paymentStatus:'refunded',refunded:new Date(clock()).toISOString()}]);await c.query('DELETE FROM cinema_seats WHERE order_id=$1',[o.id]);
