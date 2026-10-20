@@ -64,3 +64,5 @@ footer .brand-logo {
 }
 
 .love-widget{margin:12px 0}.love-hearts{display:flex;gap:4px}.love-hearts button{display:grid;place-items:center;width:36px;height:36px;padding:5px;border:0;border-radius:5px}.love-hearts svg{width:24px;height:24px;fill:transparent;stroke:#cf8f9c;stroke-width:1.5}.love-hearts .filled svg{fill:#dc7088;stroke:#dc7088}.love-hearts button:hover svg{stroke:#fff}.love-note{display:block;min-height:22px;font-size:11px;color:#aaa}.love-hearts button:disabled{opacity:.5}#love-admin h2{font-size:23px}@media(max-width:400px){.love-hearts{gap:1px}.love-hearts button{width:28px;height:32px;padding:3px}.love-hearts svg{width:22px;height:22px}}
+
+.account-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:12px 0}.account-row strong{letter-spacing:.06em;user-select:all;-webkit-user-select:all}
